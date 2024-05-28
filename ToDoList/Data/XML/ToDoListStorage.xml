@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<toDoListStorage>
+  <nextTaskId>13</nextTaskId>
+  <tasks>
+    <task>
+      <id>6</id>
+      <taskDescription>Розробити ASP.Net App</taskDescription>
+      <isCompleted>false</isCompleted>
+      <finishDate>2024-05-30</finishDate>
+      <categoryId>4</categoryId>
+    </task>
+    <task>
+      <id>7</id>
+      <taskDescription>Поприбирати в кімнаті</taskDescription>
+      <isCompleted>false</isCompleted>
+      <finishDate></finishDate>
+      <categoryId>3</categoryId>
+    </task>
+    <task>
+      <id>8</id>
+      <taskDescription>Записатись в басейн</taskDescription>
+      <isCompleted>false</isCompleted>
+      <finishDate>2024-05-31</finishDate>
+      <categoryId>6</categoryId>
+    </task>
+    <task>
+      <id>10</id>
+      <taskDescription>Записатись до лікаря</taskDescription>
+      <isCompleted>false</isCompleted>
+      <finishDate></finishDate>
+      <categoryId>7</categoryId>
+    </task>
+    <task>
+      <id>11</id>
+      <taskDescription>Випити води</taskDescription>
+      <isCompleted>false</isCompleted>
+      <finishDate></finishDate>
+      <categoryId></categoryId>
+    </task>
+    <task>
+      <id>12</id>
+      <taskDescription>Вивчити GraphQL</taskDescription>
+      <isCompleted>false</isCompleted>
+      <finishDate>2024-06-06</finishDate>
+      <categoryId>1</categoryId>
+    </task>
+  </tasks>
+  <categories>
+    <category>
+      <id>1</id>
+      <name>Навчання</name>
+      <description></description>
+    </category>
+    <category>
+      <id>2</id>
+      <name>Хобі</name>
+      <description></description>
+    </category>
+    <category>
+      <id>3</id>
+      <name>Хатні справи</name>
+      <description></description>
+    </category>
+    <category>
+      <id>4</id>
+      <name>Термінове</name>
+      <description></description>
+    </category>
+    <category>
+      <id>5</id>
+      <name>Відпочинок</name>
+      <description></description>
+    </category>
+    <category>
+      <id>6</id>
+      <name>Фітнес</name>
+      <description></description>
+    </category>
+    <category>
+      <id>7</id>
+      <name>Здоров'я</name>
+      <description></description>
+    </category>
+  </categories>
+</toDoListStorage>

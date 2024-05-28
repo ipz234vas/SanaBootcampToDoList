@@ -1,16 +1,19 @@
 using Microsoft.EntityFrameworkCore;
-using ToDoList.Models;
+using ToDoList.Factories;
+using ToDoList.Models.Contextes;
+using ToDoList.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<ToDoListDBContext>();
+builder.Services.AddSingleton<ToDoListXMLContext>();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ToDoListDBContext>(options =>
-{
-	options.UseSqlServer(connectionString);
-});
+builder.Services.AddSingleton<DBRepository>();
+builder.Services.AddSingleton<XMLRepository>();
+
+builder.Services.AddSingleton<RepositoryFactory>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
