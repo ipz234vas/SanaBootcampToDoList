@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <toDoListStorage>
-  <nextTaskId>13</nextTaskId>
+  <nextTaskId>15</nextTaskId>
   <tasks>
     <task>
       <id>6</id>
@@ -43,6 +43,13 @@
       <isCompleted>false</isCompleted>
       <finishDate>2024-06-06</finishDate>
       <categoryId>1</categoryId>
+    </task>
+    <task>
+      <id>13</id>
+      <taskDescription>Купити навушники</taskDescription>
+      <isCompleted>false</isCompleted>
+      <finishDate>2025-01-25</finishDate>
+      <categoryId></categoryId>
     </task>
   </tasks>
   <categories>

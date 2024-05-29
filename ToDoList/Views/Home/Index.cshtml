@@ -15,11 +15,12 @@
 
 	<div class="d-flex align-items-center gap-5">
 		<h2 class="text-secondary">Зміна сховища:</h2>
-		<form method="post" asp-action="Index">
+		<form method="post" asp-action="ChangeRepositoryType">
 			<select name="repositoryType" class="form-select" onchange="this.form.submit()">
-				<option value="">Оберіть сховище:</option>
+				<option value="">Доступні сховища:</option>
 				@foreach (var repoType in Enum.GetValues(typeof(RepositoryType)))
 				{
+					if (currentRepositoryType == (RepositoryType)repoType) continue;
 					<option value="@repoType.ToString()">@repoType</option>
 				}
 			</select>

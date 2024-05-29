@@ -18,10 +18,8 @@ namespace ToDoList.Controllers
             _logger = logger;
             _repositoryFactory = repositoryFactory;
         }
-        public IActionResult Index(RepositoryType? repositoryType)
+        public IActionResult Index()
         {
-            if(repositoryType != null) _repositoryFactory.RepositoryType = repositoryType.Value;
-
             var _repository = _repositoryFactory.CreateRepository();
 
             var categories = _repository.GetCategories();
@@ -33,7 +31,7 @@ namespace ToDoList.Controllers
                 Tasks = tasks
             };
 
-			ViewBag.RepositoryType = _repositoryFactory.RepositoryType;
+			ViewBag.RepositoryType = _repositoryFactory.GetRepositoryType();
 			return View(viewModel);
         }
         [HttpPost]
@@ -67,7 +65,13 @@ namespace ToDoList.Controllers
             _repository.DeleteTask(taskId);
             return RedirectToAction("Index");
         }
-        public IActionResult Privacy()
+		[HttpPost]
+		public IActionResult ChangeRepositoryType(RepositoryType repositoryType)
+		{
+			HttpContext.Session.SetString("RepositoryName", repositoryType.ToString());
+			return RedirectToAction("Index");
+		}
+		public IActionResult Privacy()
         {
             return View();
         }
