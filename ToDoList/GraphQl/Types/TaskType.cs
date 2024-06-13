@@ -1,9 +1,8 @@
 ﻿using GraphQL.Types;
 using ToDoList.Factories;
 using ToDoList.Models.Entities;
-using ToDoList.Repositories;
 
-namespace ToDoListAPI.Types
+namespace ToDoList.GraphQl.Types
 {
 	public class TaskType : ObjectGraphType<TaskModel>
 	{

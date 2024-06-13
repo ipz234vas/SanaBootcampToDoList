@@ -47,7 +47,7 @@
     <task>
       <id>13</id>
       <taskDescription>Купити навушники</taskDescription>
-      <isCompleted>true</isCompleted>
+      <isCompleted>false</isCompleted>
       <finishDate>2025-01-25</finishDate>
       <categoryId></categoryId>
     </task>

@@ -1,6 +1,6 @@
 ﻿using GraphQL.Types;
 
-namespace ToDoListAPI.Types
+namespace ToDoList.GraphQl.Types
 {
 	public class InputTaskType : InputObjectGraphType
 	{

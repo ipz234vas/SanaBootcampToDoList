@@ -1,4 +1,4 @@
-﻿namespace ToDoListAPI.Middlewares
+﻿namespace ToDoList.GraphQl.Middlewares
 {
 	public class RepositoryMiddleware
 	{

@@ -1,13 +1,12 @@
 ﻿using GraphQL.Types;
 using ToDoList.Factories;
 using ToDoList.Models.Entities;
-using ToDoList.Repositories;
 
-namespace ToDoListAPI.Types
+namespace ToDoList.GraphQl.Types
 {
 	public class CategoryType : ObjectGraphType<CategoryModel>
 	{
-		public CategoryType(RepositoryFactory factory) 
+		public CategoryType(RepositoryFactory factory)
 		{
 			var repository = factory.GetRepository(factory._httpContextAccessor.HttpContext);
 			Field(x => x.Id);

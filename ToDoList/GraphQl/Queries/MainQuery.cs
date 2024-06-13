@@ -1,11 +1,9 @@
 ﻿using GraphQL;
 using GraphQL.Types;
 using ToDoList.Factories;
-using ToDoList.Models.Entities;
-using ToDoList.Repositories;
-using ToDoListAPI.Types;
+using ToDoList.GraphQl.Types;
 
-namespace ToDoListAPI.Queries
+namespace ToDoList.GraphQl.Queries
 {
 	public class MainQuery : ObjectGraphType
 	{
@@ -26,7 +24,7 @@ namespace ToDoListAPI.Queries
 					return null;
 				}
 			}).Description("Get task by Id");
-			
+
 			Field<ListGraphType<TaskType>>("tasks").Resolve(context =>
 			repository.GetTasks()).Description("Get all tasks");
 

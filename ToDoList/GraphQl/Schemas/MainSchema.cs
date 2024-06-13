@@ -1,8 +1,9 @@
 ﻿using GraphQL.Types;
-using ToDoListAPI.Mutations;
-using ToDoListAPI.Queries;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using ToDoList.GraphQl.Mutations;
+using ToDoList.GraphQl.Queries;
 
-namespace ToDoListAPI.Schemas
+namespace ToDoList.GraphQl.Schemas
 {
 	public class MainSchema : Schema
 	{

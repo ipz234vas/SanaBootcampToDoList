@@ -1,11 +1,10 @@
 ﻿using GraphQL;
 using GraphQL.Types;
 using ToDoList.Factories;
+using ToDoList.GraphQl.Types;
 using ToDoList.Models.Entities;
-using ToDoList.Repositories;
-using ToDoListAPI.Types;
 
-namespace ToDoListAPI.Mutations
+namespace ToDoList.GraphQl.Mutations
 {
 	public class MainMutation : ObjectGraphType
 	{
@@ -40,7 +39,7 @@ namespace ToDoListAPI.Mutations
 						return null;
 					}
 				}
-				return taskToUpdate;
+				return repository.GetTaskById(taskToUpdate.Id);
 			}).Description("Update task status");
 			Field<String>("deleteTask").Arguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }).Resolve(context =>
 			{
