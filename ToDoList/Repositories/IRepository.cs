@@ -6,8 +6,10 @@ namespace ToDoList.Repositories
     public interface IRepository
     {
         public List<TaskModel> GetTasks();
-        public List<CategoryModel> GetCategories();
-        public void AddTask(TaskModel task);
+		public TaskModel GetTaskById(int taskId);
+		public List<CategoryModel> GetCategories();
+        public CategoryModel GetCategoryById(int categoryId);
+		public TaskModel AddTask(TaskModel task);
         public void UpdateTaskStatus(int taskId, bool IsCompleted);
         public void DeleteTask(int taskId);
     }

@@ -53,6 +53,21 @@ namespace ToDoList.Repositories
 			return tasks.ToList();
 		}
 
+		public TaskModel GetTaskById(int taskId)
+		{
+			var connection = _context.CreateConnection();
+
+			var sql = "SELECT * FROM Tasks WHERE Id = @TaskId";
+			var task = connection.QuerySingleOrDefault<TaskModel>(sql, new { TaskId = taskId });
+
+			if (task != null && task.CategoryId.HasValue)
+			{
+				task.Category = GetCategoryById(task.CategoryId.Value);
+			}
+
+			return task;
+		}
+
 		public List<CategoryModel> GetCategories()
 		{
 			var connection = _context.CreateConnection();
@@ -63,15 +78,31 @@ namespace ToDoList.Repositories
 
 			return categories.ToList();
 		}
-
-		public void AddTask(TaskModel task)
+		public CategoryModel GetCategoryById(int categoryId)
 		{
 			var connection = _context.CreateConnection();
 
-			var sql = "INSERT INTO Tasks (TaskDescription, isCompleted, FinishDate, CategoryId) " +
-			   "VALUES (@TaskDescription, @isCompleted, @FinishDate, @CategoryId)";
+			var sql = "SELECT * FROM Categories WHERE Id = @CategoryId";
 
-			connection.Execute(sql, task);
+			var category = connection.QuerySingleOrDefault<CategoryModel>(sql, new { CategoryId = categoryId });
+
+			return category;
+		}
+
+		public TaskModel AddTask(TaskModel task)
+		{
+			var connection = _context.CreateConnection();
+
+			var sql = @"
+						INSERT INTO Tasks (TaskDescription, IsCompleted, FinishDate, CategoryId)
+						OUTPUT INSERTED.Id
+						VALUES (@TaskDescription, @IsCompleted, @FinishDate, @CategoryId);
+					   ";
+
+			var taskId = connection.QuerySingle<int>(sql, task);
+			task.Id = taskId;
+
+			return task;
 		}
 
 		public void UpdateTaskStatus(int taskId, bool isCompleted)
@@ -79,7 +110,8 @@ namespace ToDoList.Repositories
 			var connection = _context.CreateConnection();
 
 			var sql = "UPDATE Tasks SET IsCompleted = @isCompleted WHERE Id = @taskId";
-			connection.Execute(sql, new { TaskId = taskId, IsCompleted = isCompleted });
+			int updatedTasksCount = connection.Execute(sql, new { TaskId = taskId, IsCompleted = isCompleted });
+			if(updatedTasksCount == 0) throw new Exception($"Task with ID {taskId} does not exist.");
 		}
 
 		public void DeleteTask(int taskId)
@@ -87,7 +119,8 @@ namespace ToDoList.Repositories
 			var connection = _context.CreateConnection();
 
 			var sql = "DELETE FROM Tasks WHERE Id = @taskId";
-			connection.Execute(sql, new { TaskId = taskId });
+			int deletedTasksCount = connection.Execute(sql, new { TaskId = taskId });
+			if (deletedTasksCount == 0) throw new Exception($"Task with ID {taskId} does not exist.");
 		}
 	}
 }

@@ -21,7 +21,7 @@ namespace ToDoList.Factories
 			}
 			return RepositoryType.DataBase;
 		}
-		public IRepository CreateRepository()
+		public IRepository GetRepository()
 		{
 			var repositoryType = GetRepositoryType();
 			return repositoryType switch

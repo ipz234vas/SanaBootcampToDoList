@@ -20,7 +20,7 @@ namespace ToDoList.Controllers
         }
         public IActionResult Index()
         {
-            var _repository = _repositoryFactory.CreateRepository();
+            var _repository = _repositoryFactory.GetRepository();
 
             var categories = _repository.GetCategories();
             var tasks = _repository.GetTasks();
@@ -37,7 +37,7 @@ namespace ToDoList.Controllers
         [HttpPost]
         public IActionResult AddTask(TaskModel model)
         {
-            var _repository = _repositoryFactory.CreateRepository();
+            var _repository = _repositoryFactory.GetRepository();
 
             var newTask = new TaskModel
             {
@@ -52,7 +52,7 @@ namespace ToDoList.Controllers
         [HttpPost]
         public IActionResult UpdateTaskStatus(int taskId, bool IsCompleted)
         {
-            var _repository = _repositoryFactory.CreateRepository();
+            var _repository = _repositoryFactory.GetRepository();
 
             _repository.UpdateTaskStatus(taskId, IsCompleted);
             return RedirectToAction("Index");
@@ -60,7 +60,7 @@ namespace ToDoList.Controllers
         [HttpPost]
         public IActionResult DeleteTask(int taskId)
         {
-            var _repository = _repositoryFactory.CreateRepository();
+            var _repository = _repositoryFactory.GetRepository();
 
             _repository.DeleteTask(taskId);
             return RedirectToAction("Index");

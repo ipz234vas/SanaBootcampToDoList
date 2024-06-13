@@ -39,6 +39,34 @@ namespace ToDoList.Repositories
 
 			return tasks.ToList();
 		}
+		public TaskModel GetTaskById(int taskId)
+		{
+			XDocument document = XDocument.Load(_context._XMLConnectionString);
+
+			var taskElement = document.Root.Elements("tasks").Elements("task").FirstOrDefault(task => (int)task.Element("id") == taskId);
+
+			if (taskElement != null)
+			{
+				var task = new TaskModel
+				{
+					Id = int.Parse(taskElement.Element("id").Value),
+					TaskDescription = taskElement.Element("taskDescription").Value,
+					IsCompleted = bool.Parse(taskElement.Element("isCompleted").Value),
+					FinishDate = string.IsNullOrEmpty(taskElement.Element("finishDate").Value) ? (DateTime?)null : DateTime.Parse(taskElement.Element("finishDate").Value),
+					CategoryId = string.IsNullOrEmpty(taskElement.Element("categoryId").Value) ? (int?)null : int.Parse(taskElement.Element("categoryId").Value)
+				};
+
+				if (task.CategoryId.HasValue)
+				{
+					task.Category = GetCategoryById(task.CategoryId.Value);
+				}
+
+				return task;
+			}
+
+			return null;
+		}
+
 		public List<CategoryModel> GetCategories()
 		{
 			XDocument document = XDocument.Load(_context._XMLConnectionString);
@@ -51,7 +79,28 @@ namespace ToDoList.Repositories
 
 			return categories.OrderBy(category => category.Name).ToList();
 		}
-		public void AddTask(TaskModel task)
+		public CategoryModel GetCategoryById(int categoryId)
+		{
+			XDocument document = XDocument.Load(_context._XMLConnectionString);
+
+			var category = document.Root
+				.Elements("categories")
+				.Elements("category")
+				.FirstOrDefault(category => (int)category.Element("id") == categoryId);
+
+			if (category != null)
+			{
+				return new CategoryModel
+				{
+					Id = int.Parse(category.Element("id").Value),
+					Name = category.Element("name").Value,
+					Description = category.Element("description").Value
+				};
+			}
+
+			return null;
+		}
+		public TaskModel AddTask(TaskModel task)
 		{
 			XDocument document = XDocument.Load(_context._XMLConnectionString);
 
@@ -75,6 +124,8 @@ namespace ToDoList.Repositories
 			tasksElement.Add(newTaskElement);
 
 			document.Save(_context._XMLConnectionString);
+
+			return task;
 		}
 		public void UpdateTaskStatus(int taskId, bool IsCompleted)
 		{
@@ -87,6 +138,7 @@ namespace ToDoList.Repositories
 
 				document.Save(_context._XMLConnectionString);
 			}
+			else throw new Exception($"Task with ID {taskId} does not exist.");
 		}
 		public void DeleteTask(int taskId)
 		{
@@ -100,6 +152,7 @@ namespace ToDoList.Repositories
 
 				document.Save(_context._XMLConnectionString);
 			}
+			else throw new Exception($"Task with ID {taskId} does not exist.");
 		}
 	}
 }
