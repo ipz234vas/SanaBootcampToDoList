@@ -1,4 +1,5 @@
 ﻿using GraphQL.Types;
+using ToDoList.Factories;
 using ToDoList.Models.Entities;
 using ToDoList.Repositories;
 
@@ -6,8 +7,9 @@ namespace ToDoListAPI.Types
 {
 	public class TaskType : ObjectGraphType<TaskModel>
 	{
-		public TaskType(IRepository repository)
+		public TaskType(RepositoryFactory factory)
 		{
+			var repository = factory.GetRepository(factory._httpContextAccessor.HttpContext);
 			Field(task => task.Id, true);
 			Field(task => task.TaskDescription, true);
 			Field(task => task.IsCompleted, true);

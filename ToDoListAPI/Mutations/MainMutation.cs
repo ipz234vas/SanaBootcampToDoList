@@ -1,5 +1,6 @@
 ﻿using GraphQL;
 using GraphQL.Types;
+using ToDoList.Factories;
 using ToDoList.Models.Entities;
 using ToDoList.Repositories;
 using ToDoListAPI.Types;
@@ -8,8 +9,9 @@ namespace ToDoListAPI.Mutations
 {
 	public class MainMutation : ObjectGraphType
 	{
-		public MainMutation(IRepository repository)
+		public MainMutation(RepositoryFactory factory)
 		{
+			var repository = factory.GetRepository(factory._httpContextAccessor.HttpContext);
 			Field<TaskType>("addTask").Arguments(new QueryArgument<InputTaskType> { Name = "task" }).Resolve(context =>
 			{
 				var task = context.GetArgument<TaskModel>("task");
@@ -22,7 +24,7 @@ namespace ToDoListAPI.Mutations
 					context.Errors.Add(new ExecutionError(ex.Message));
 					return ex.Message;
 				}
-			});
+			}).Description("Add new task");
 			Field<TaskType>("updateTaskStatus").Arguments(new QueryArgument<InputTaskType> { Name = "task" }).Resolve(context =>
 			{
 				var taskToUpdate = context.GetArgument<TaskModel>("task");
@@ -39,7 +41,7 @@ namespace ToDoListAPI.Mutations
 					}
 				}
 				return taskToUpdate;
-			});
+			}).Description("Update task status");
 			Field<String>("deleteTask").Arguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }).Resolve(context =>
 			{
 				var taskId = context.GetArgument<int>("id");
@@ -55,7 +57,7 @@ namespace ToDoListAPI.Mutations
 				}
 
 				return "Task deleted successful";
-			});
+			}).Description("Delete task");
 		}
 	}
 }

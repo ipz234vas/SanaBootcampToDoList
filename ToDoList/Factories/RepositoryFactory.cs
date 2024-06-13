@@ -5,7 +5,7 @@ namespace ToDoList.Factories
 	public class RepositoryFactory
 	{
 		private readonly IServiceProvider _serviceProvider;
-		private readonly IHttpContextAccessor _httpContextAccessor;
+		public IHttpContextAccessor _httpContextAccessor;
 
 		public RepositoryFactory(IServiceProvider serviceProvider, IHttpContextAccessor httpContextAccessor)
 		{
@@ -24,6 +24,21 @@ namespace ToDoList.Factories
 		public IRepository GetRepository()
 		{
 			var repositoryType = GetRepositoryType();
+			return repositoryType switch
+			{
+				RepositoryType.DataBase => _serviceProvider.GetRequiredService<DBRepository>(),
+				RepositoryType.XML => _serviceProvider.GetRequiredService<XMLRepository>(),
+				_ => throw new ArgumentException("Invalid repository type", nameof(repositoryType))
+			};
+		}
+		public IRepository GetRepository(HttpContext context)
+		{
+			string? repositoryTypeString = context.Items["RepositoryType"]?.ToString();
+			if (!Enum.TryParse<RepositoryType>(repositoryTypeString, out RepositoryType repositoryType))
+			{
+				repositoryType = RepositoryType.DataBase;
+			}
+
 			return repositoryType switch
 			{
 				RepositoryType.DataBase => _serviceProvider.GetRequiredService<DBRepository>(),

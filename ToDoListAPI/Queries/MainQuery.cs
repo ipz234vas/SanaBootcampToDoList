@@ -9,8 +9,10 @@ namespace ToDoListAPI.Queries
 {
 	public class MainQuery : ObjectGraphType
 	{
-		public MainQuery(IRepository repository)
+		public MainQuery(RepositoryFactory factory)
 		{
+			var repository = factory.GetRepository(factory._httpContextAccessor.HttpContext);
+
 			Field<TaskType>("task").Arguments(new QueryArgument<IdGraphType> { Name = "id" }).Resolve(context =>
 			{
 				var taskId = context.GetArgument<int>("id");
@@ -23,10 +25,10 @@ namespace ToDoListAPI.Queries
 					context.Errors.Add(new ExecutionError(ex.Message));
 					return null;
 				}
-			});
+			}).Description("Get task by Id");
 			
 			Field<ListGraphType<TaskType>>("tasks").Resolve(context =>
-			repository.GetTasks());
+			repository.GetTasks()).Description("Get all tasks");
 
 			Field<CategoryType>("category").Arguments(new QueryArgument<IdGraphType> { Name = "id" }).Resolve(context =>
 			{
@@ -40,10 +42,10 @@ namespace ToDoListAPI.Queries
 					context.Errors.Add(new ExecutionError(ex.Message));
 					return null;
 				}
-			});
+			}).Description("Get category by Id");
 
 			Field<ListGraphType<CategoryType>>("categories").Resolve(context =>
-			repository.GetCategories());
+			repository.GetCategories()).Description("Get all categories");
 		}
 	}
 }
