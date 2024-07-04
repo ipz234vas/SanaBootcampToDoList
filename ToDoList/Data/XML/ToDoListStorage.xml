@@ -52,23 +52,9 @@
       <categoryId></categoryId>
     </task>
     <task>
-      <id>17</id>
-      <taskDescription>Поприбирати</taskDescription>
-      <isCompleted>false</isCompleted>
-      <finishDate>2024-06-19</finishDate>
-      <categoryId>3</categoryId>
-    </task>
-    <task>
-      <id>19</id>
-      <taskDescription>Поприбирати</taskDescription>
-      <isCompleted>false</isCompleted>
-      <finishDate>2024-06-19</finishDate>
-      <categoryId>3</categoryId>
-    </task>
-    <task>
       <id>20</id>
       <taskDescription>Поприбирати</taskDescription>
-      <isCompleted>false</isCompleted>
+      <isCompleted>true</isCompleted>
       <finishDate>2024-06-19</finishDate>
       <categoryId>3</categoryId>
     </task>
