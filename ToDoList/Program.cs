@@ -37,6 +37,17 @@ builder.Services.AddGraphQL(options =>
 	options.AddAutoSchema<ISchema>().AddSystemTextJson();
 });
 
+var provider = builder.Services.BuildServiceProvider();
+var configuration = provider.GetRequiredService<IConfiguration>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -49,6 +60,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseMiddleware<RepositoryMiddleware>();
 app.UseGraphQLAltair("/graphql");
+app.UseCors();
 app.UseGraphQL<ISchema>();
 
 app.UseHttpsRedirection();

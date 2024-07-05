@@ -19,7 +19,7 @@
     <task>
       <id>8</id>
       <taskDescription>Записатись в басейн</taskDescription>
-      <isCompleted>false</isCompleted>
+      <isCompleted>true</isCompleted>
       <finishDate>2024-05-31</finishDate>
       <categoryId>6</categoryId>
     </task>
@@ -33,7 +33,7 @@
     <task>
       <id>11</id>
       <taskDescription>Випити води</taskDescription>
-      <isCompleted>false</isCompleted>
+      <isCompleted>true</isCompleted>
       <finishDate></finishDate>
       <categoryId></categoryId>
     </task>

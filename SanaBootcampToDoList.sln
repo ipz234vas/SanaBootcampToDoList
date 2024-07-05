@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList", "ToDoList\ToDoList.csproj", "{C28FD840-34F2-4F76-9610-E07ADC8057A4}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "front_react", "front_react\front_react.esproj", "{8760D229-D6B5-40B4-8C5E-DEB913B0DD18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,12 @@ Global
 		{C28FD840-34F2-4F76-9610-E07ADC8057A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C28FD840-34F2-4F76-9610-E07ADC8057A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C28FD840-34F2-4F76-9610-E07ADC8057A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8760D229-D6B5-40B4-8C5E-DEB913B0DD18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8760D229-D6B5-40B4-8C5E-DEB913B0DD18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8760D229-D6B5-40B4-8C5E-DEB913B0DD18}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8760D229-D6B5-40B4-8C5E-DEB913B0DD18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8760D229-D6B5-40B4-8C5E-DEB913B0DD18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8760D229-D6B5-40B4-8C5E-DEB913B0DD18}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
